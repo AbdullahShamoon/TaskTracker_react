@@ -53,7 +53,7 @@ function App() {
         <div className="addTodo w-1/2">
           <h2 className='text-md font-bold mb-1'>Add a Todo</h2>
           <input type="text" onChange={handleChange} value={todo} className='w-[87%] px-3 py-1' />
-          <button onClick={handleAdd} disabled={todo.length <= 3} className='bg-blue-900 hover:bg-blue-800 text-white text-sm font-bold mx-3 px-3 py-1 rounded  disabled:bg-red-600'>Add</button>
+          <button onClick={handleAdd} disabled={todo.length <= 3} className='bg-blue-900 hover:bg-blue-800 text-white text-sm font-bold mx-3 px-3 py-1 rounded disabled:bg-blue-950'>Add</button>
         </div>
         <h2 className='text-md font-bold mt-3'>Your Todos</h2>
         <div className="todos w-1/2 flex flex-col">
