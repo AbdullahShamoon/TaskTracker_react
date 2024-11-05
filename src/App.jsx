@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import Navbar from './components/Navbar'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -6,12 +6,23 @@ function App() {
   const [todo, setTodo] = useState("")
   const [todos, setTodos] = useState([])
 
+  useEffect(() => {
+    let todoString = localStorage.getItem("todos")
+    todoString && setTodos(JSON.parse(todoString))
+  }, [])
+  
+
+  const saveToLocal = () => {
+    localStorage.setItem("todos",JSON.stringify(todos))
+  }
+
   const handleChange = (e) => {
     setTodo(e.target.value)
   }
   const handleAdd = () => {
     setTodos([...todos, { id: uuidv4(), todo, isCompleted: false }])
     setTodo("")
+    saveToLocal()
   }
   const handleEdit = (e, i) => {
     let t= todos.filter((items)=> items.id === i)
@@ -19,10 +30,12 @@ function App() {
 
     let newTodo = todos.filter((items) => items.id !== i)
     setTodos(newTodo)
+    saveToLocal()
   }
   const handleDelete = (e, i) => {
     let newTodo = todos.filter((items) => items.id !== i)
     setTodos(newTodo)
+    saveToLocal()
   }
   const handleCheckbox = (e) => {
     let i = e.target.name
@@ -30,6 +43,7 @@ function App() {
     let arr = [...todos]
     arr[index].isCompleted = !arr[index].isCompleted
     setTodos(arr)
+    saveToLocal()
   }
 
   return (
@@ -39,7 +53,7 @@ function App() {
         <div className="addTodo w-1/2">
           <h2 className='text-md font-bold mb-1'>Add a Todo</h2>
           <input type="text" onChange={handleChange} value={todo} className='w-[87%] px-3 py-1' />
-          <button onClick={handleAdd} className='bg-blue-900 hover:bg-blue-800 text-white text-sm font-bold mx-3 px-3 py-1 rounded'>Add</button>
+          <button onClick={handleAdd} disabled={todo.length <= 3} className='bg-blue-900 hover:bg-blue-800 text-white text-sm font-bold mx-3 px-3 py-1 rounded  disabled:bg-red-600'>Add</button>
         </div>
         <h2 className='text-md font-bold mt-3'>Your Todos</h2>
         <div className="todos w-1/2 flex flex-col">
@@ -49,7 +63,7 @@ function App() {
 
             return <div key={items.id} className="todo flex justify-between items-center my-1 py-1 pl-2 bg-blue-200 ">
               <div className="Written w-9/12 flex gap-1">
-                <input type="checkbox" value={items.isCompleted} name={items.id} onChange={handleCheckbox} id="" />
+                <input type="checkbox" checked={items.isCompleted} name={items.id} onChange={handleCheckbox} id="" />
                 <div className="text"><span className={items.isCompleted ? "line-through" : ""}>{items.todo}</span></div>
               </div>
               <div className="buttons">
