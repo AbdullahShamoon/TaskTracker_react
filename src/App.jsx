@@ -15,8 +15,10 @@ function App() {
   }
   const handleEdit = (e, i) => {
     let t= todos.filter((items)=> items.id === i)
-    console.log(t)
     setTodo(t[0].todo)
+
+    let newTodo = todos.filter((items) => items.id !== i)
+    setTodos(newTodo)
   }
   const handleDelete = (e, i) => {
     let newTodo = todos.filter((items) => items.id !== i)
