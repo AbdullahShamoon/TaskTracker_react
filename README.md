@@ -12,7 +12,7 @@ A responsive to-do list website built using **React.js** (with Vite) and **Tailw
 
 ## Demo
 
-[Link to live demo](#) *(Replace with the actual link once deployed)*
+[Link to live demo - https://abdullahshamoon.github.io/TaskTracker_react/](https://abdullahshamoon.github.io/TaskTracker_react/) 
 
 ## Screenshots
 
