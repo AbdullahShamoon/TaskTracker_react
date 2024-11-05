@@ -66,7 +66,7 @@ function App() {
         </div>
         <div className="show pt-5 pl-2 flex gap-3">
           <input type="checkbox" onChange={toggleFinished} />
-          <span>Show Finished</span>
+          <span>Hide Finished</span>
         </div>
         <div className="w-5/6 bg-[#1512445d] h-[1px] mx-auto mt-3"></div>
         <h2 className='text-xl font-bold my-3 pl-2'>Your Todos</h2>
